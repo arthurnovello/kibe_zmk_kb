@@ -1,0 +1,130 @@
+units:
+  # Proxy Spacing Variables
+  kx: cx
+  ky: cy
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+points:
+  zones:
+    matrix:
+      columns:
+        outer:
+        pinky:
+        ring:
+          key:
+            stagger: 5
+        middle:
+          key:
+            stagger: 2.5
+        index:
+          key:
+            stagger: -2.5
+        inner:
+          key:
+            stagger: -2.5
+      rows:
+        mod:
+        bottom:
+        home:
+        top:
+        num:
+    thumbs:
+      # Choc spacing
+      key:
+        padding: 1ky
+        spread: 1kx
+      # Place thumbs where the inner mod would go.
+      anchor:
+        ref: matrix_inner_mod
+        shift: [2, -1.5ky]
+      columns:
+        # Fan thumbs out by -15 degrees.
+        layer:
+          key.splay: -15
+        # Spacebar uses a 1.5 wide key.
+        space:
+          key:
+            width: 2ky
+            shift: [-1.5kx,16]
+            splay: 90
+          rows.shft.skip: true
+          rows.ctrl.skip: true
+        win:
+          key.shift: [-1.05ky, -1]
+          rows.alt.skip: true
+          rows.ctrl.skip: true
+      rows:
+        shft:
+        alt:
+          shift: [0, -2ky]
+        ctrl:
+          shift: [0, -2ky]
+  rotate: -20
+  mirror: &mirror
+    ref: matrix_inner_num
+    distance: 2.5kx
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      bound: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_outer_num
+          shift: [-0.5px,0.5py]
+        - ref: matrix_ring_num
+          shift: [-0.5px,0.5py]
+        - ref: matrix_middle_num
+          shift: [-0.5px,0.5py]
+        - ref: matrix_middle_num
+          shift: [0.5px,0.5py]
+        - ref: matrix_inner_num
+          shift: [0.5px,0.5py]
+        - ref: mirror_matrix_inner_num
+          shift: [0.5px,0.5py]
+        - ref: mirror_matrix_middle_num
+          shift: [0.5px,0.5py]
+        - ref: mirror_matrix_middle_num
+          shift: [-0.5px,0.5py]
+        - ref: mirror_matrix_ring_num
+          shift: [-0.5px,0.5py]
+        - ref: mirror_matrix_outer_num
+          shift: [-0.5px,0.5py]
+        - ref: mirror_matrix_outer_mod
+          shift: [-0.5px,-0.5py]
+        - ref: mirror_matrix_ring_mod
+          shift: [-0.5px,-0.75py]
+        - ref: mirror_matrix_middle_mod
+          shift: [-0.5px,-0.75py]
+        - ref: mirror_thumbs_layer_shft
+          shift: [-0.75px,0.5py]
+        - ref: mirror_thumbs_layer_ctrl
+          shift: [-0.75px,-0.75py]
+        - ref: mirror_thumbs_space_alt
+          shift: [-0.75px,-0.5py]
+        - ref: thumbs_space_alt
+          shift: [-0.75px,-0.5py]
+        - ref: thumbs_layer_ctrl
+          shift: [-0.75px,-0.75py]
+        - ref: thumbs_layer_shft
+          shift: [-0.75px,0.5py]
+        - ref: matrix_middle_mod
+          shift: [-0.5px,-0.75py]
+        - ref: matrix_ring_mod
+          shift: [-0.5px,-0.75py]
+        - ref: matrix_outer_mod
+          shift: [-0.5px,-0.5py]
+      fillet: 2
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
